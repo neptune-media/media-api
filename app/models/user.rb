@@ -9,6 +9,6 @@ class User < ApplicationRecord
   validates :email, presence: true
   validates :username, presence: true
 
-  has_many :user_groups
+  has_many :user_groups, dependent: :destroy
   has_many :groups, through: :user_groups
 end

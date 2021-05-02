@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateStorageBackends < ActiveRecord::Migration[6.1]
   def change
     create_table :storage_backends, id: :uuid do |t|
