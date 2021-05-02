@@ -7,8 +7,9 @@ class CreateStorageBackends < ActiveRecord::Migration[6.1]
       t.string :bucket
       t.string :prefix
       t.string :backend_type
-      t.string :access_key
-      t.string :secret_key
+      t.text :access_key_ciphertext
+      t.text :secret_key_ciphertext
+      t.text :encrypted_kms_key
       t.references :group, null: false, foreign_key: true, type: :uuid
 
       t.timestamps

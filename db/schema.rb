@@ -20,9 +20,9 @@ ActiveRecord::Schema.define(version: 2021_05_02_153904) do
     t.string "media_server_type"
     t.string "media_types"
     t.string "job_types"
-    t.string "addr"
+    t.string "addr", null: false
     t.string "display_name"
-    t.uuid "access_key"
+    t.uuid "access_key", null: false
     t.uuid "group_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -52,8 +52,9 @@ ActiveRecord::Schema.define(version: 2021_05_02_153904) do
     t.string "bucket"
     t.string "prefix"
     t.string "backend_type"
-    t.string "access_key"
-    t.string "secret_key"
+    t.text "access_key_ciphertext"
+    t.text "secret_key_ciphertext"
+    t.text "encrypted_kms_key"
     t.uuid "group_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -72,9 +73,9 @@ ActiveRecord::Schema.define(version: 2021_05_02_153904) do
   end
 
   create_table "users", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.string "email", default: "", null: false
-    t.string "encrypted_password", default: "", null: false
-    t.string "username", default: ""
+    t.string "email", null: false
+    t.string "encrypted_password", null: false
+    t.string "username", null: false
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"

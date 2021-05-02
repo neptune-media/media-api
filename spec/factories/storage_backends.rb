@@ -4,7 +4,6 @@ FactoryBot.define do
   factory :storage_backend do
     group { build(:group) }
     bucket { 'test-bucket' }
-    prefix { 'foo' }
 
     factory :minio_storage_backend do
       backend_type { 'minio' }
