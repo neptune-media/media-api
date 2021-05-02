@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# Authenticates the user and returns a signed JWT
 class AuthenticationController < ApplicationController
   def authenticate_user
     user = User.find_for_database_authentication(email: params[:email])
@@ -13,7 +14,7 @@ class AuthenticationController < ApplicationController
   private
 
   def payload(user)
-    return nil unless user && user.id
+    return nil unless user&.id
 
     {
       auth_token: JsonWebToken.encode(jwt_token(user)),

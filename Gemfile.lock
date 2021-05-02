@@ -196,6 +196,9 @@ GEM
       activesupport (>= 4.2.0)
       rack (>= 1.1)
       rubocop (>= 0.90.0, < 2.0)
+    rubocop-rspec (2.3.0)
+      rubocop (~> 1.0)
+      rubocop-ast (>= 1.1.0)
     ruby-progressbar (1.11.0)
     sidekiq (6.2.1)
       connection_pool (>= 2.2.2)
@@ -238,6 +241,7 @@ DEPENDENCIES
   redis (~> 4.0)
   rspec-rails (~> 5.0.0)
   rubocop-rails
+  rubocop-rspec
   sidekiq
   spring
   tzinfo-data

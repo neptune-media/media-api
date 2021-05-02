@@ -1,0 +1,41 @@
+inherit_from: .rubocop_todo.yml
+
+require:
+  - rubocop-rails
+  - rubocop-rspec
+
+AllCops:
+  NewCops: enable
+
+Layout/EmptyLines:
+  Exclude:
+    - 'config/environments/*'
+
+Layout/ExtraSpacing:
+  Exclude:
+    - 'config/environments/*'
+
+Layout/LineLength:
+  Max: 120
+  Exclude:
+    - 'config/**/*'
+
+Metrics/MethodLength:
+  Exclude:
+    - 'db/**/*'
+
+Style/BlockComments:
+  Exclude:
+    - 'spec/spec_helper.rb'
+
+Style/Documentation:
+  Exclude:
+    - 'app/models/application_record.rb'
+    - 'config/**/*'
+    - 'db/**/*'
+
+Style/StringLiterals:
+  EnforcedStyle: single_quotes
+
+Style/SymbolArray:
+  EnforcedStyle: brackets
