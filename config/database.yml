@@ -58,8 +58,8 @@ development:
 test:
   <<: *default
   database: app_test
-  username: <%= ENV.fetch("DATABASE_USER") { "app_development" } %>
-  password: <%= ENV.fetch("DATABASE_PASSWORD") { "" } %>
+  username: <%= ENV.fetch("DATABASE_USER") { "app" } %>
+  password: <%= ENV.fetch("DATABASE_PASSWORD") { "app" } %>
   host: <%= ENV.fetch("DATABASE_HOST") { "localhost" } %>
 
 # As with config/credentials.yml, you never want to store sensitive information,
