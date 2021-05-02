@@ -1,0 +1,2 @@
+class PreviewJob < Job
+end
