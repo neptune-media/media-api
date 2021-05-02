@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   scope :auth, defaults: { format: :json } do
     devise_for :users, skip: :all
     devise_scope :user do
-      post 'signup' => 'devise/registrations#create'
+      post 'signup' => 'users/registrations#create'
     end
     post 'signin' => 'authentication#authenticate_user'
   end
