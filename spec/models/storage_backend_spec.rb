@@ -1,7 +1,18 @@
 # frozen_string_literal: true
 
 require 'rails_helper'
+require 'shared_examples/model_validations'
 
 RSpec.describe StorageBackend, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  describe 'with minio' do
+    subject { build(:minio_storage_backend) }
+
+    include_examples 'model_validations'
+  end
+
+  describe 'with s3' do
+    subject { build(:s3_storage_backend) }
+
+    include_examples 'model_validations'
+  end
 end
