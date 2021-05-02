@@ -3,8 +3,8 @@
 require 'rails_helper'
 require 'shared_examples/model_validations'
 
-RSpec.describe User, type: :model do
-  subject { build(:user) }
+RSpec.describe UserGroup, type: :model do
+  subject { build(:user_group) }
 
   include_examples 'model_validations'
 end
