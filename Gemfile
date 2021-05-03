@@ -29,7 +29,7 @@ gem 'rack-cors'
 
 gem 'aws-sdk-kms'
 gem 'devise'
-gem 'jsonapi-rails'
+gem 'jsonapi-resources'
 gem 'jwt'
 gem 'kms_encrypted'
 gem 'lockbox'
