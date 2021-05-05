@@ -7,6 +7,7 @@ Rails.application.routes.draw do
       jsonapi_resources :groups, only: [:index, :create, :show, :update, :destroy]
       jsonapi_resources :jobs, only: [:index, :create, :show, :update, :destroy]
       jsonapi_resources :storage_backends, only: [:index, :create, :show, :update, :destroy]
+      jsonapi_resources :tasks, only: [:index, :create, :show, :update, :destroy]
       jsonapi_resources :users, only: [:index, :create, :show, :update, :destroy]
     end
   end

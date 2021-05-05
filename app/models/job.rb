@@ -3,6 +3,5 @@
 class Job < ApplicationRecord
   belongs_to :group
   belongs_to :agent
-
-  validates :params, presence: true
+  has_many :tasks, dependent: :destroy
 end

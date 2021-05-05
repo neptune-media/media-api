@@ -89,6 +89,8 @@ GEM
       warden (~> 1.2.3)
     diff-lcs (1.4.4)
     docile (1.3.5)
+    ecma-re-validator (0.3.0)
+      regexp_parser (~> 2.0)
     erubi (1.10.0)
     factory_bot (6.1.0)
       activesupport (>= 5.0.0)
@@ -98,9 +100,15 @@ GEM
     ffi (1.15.0)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
+    hana (1.3.7)
     i18n (1.8.10)
       concurrent-ruby (~> 1.0)
     jmespath (1.4.0)
+    json_schemer (0.2.18)
+      ecma-re-validator (~> 0.3)
+      hana (~> 1.3)
+      regexp_parser (~> 2.0)
+      uri_template (~> 0.7)
     jsonapi-resources (0.10.4)
       activerecord (>= 4.1)
       concurrent-ruby
@@ -235,6 +243,7 @@ GEM
     tzinfo (2.0.4)
       concurrent-ruby (~> 1.0)
     unicode-display_width (2.0.0)
+    uri_template (0.7.0)
     warden (1.2.9)
       rack (>= 2.0.9)
     websocket-driver (0.7.3)
@@ -251,6 +260,7 @@ DEPENDENCIES
   byebug
   devise
   factory_bot_rails
+  json_schemer
   jsonapi-resources
   jwt
   kms_encrypted

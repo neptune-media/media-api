@@ -3,8 +3,8 @@
 module Api
   module V1
     class JobResource < JSONAPI::Resource
-      attributes :params
-      relationship :agents, to: :one
+      relationship :groups, to: :one
+      relationship :tasks, to: :many
     end
   end
 end

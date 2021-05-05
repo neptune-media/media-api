@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_05_172750) do
+ActiveRecord::Schema.define(version: 2021_05_05_210709) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -39,7 +39,6 @@ ActiveRecord::Schema.define(version: 2021_05_05_172750) do
   create_table "jobs", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "group_id", null: false
     t.uuid "agent_id", null: false
-    t.jsonb "data"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["agent_id"], name: "index_jobs_on_agent_id"
@@ -58,6 +57,17 @@ ActiveRecord::Schema.define(version: 2021_05_05_172750) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["group_id"], name: "index_storage_backends_on_group_id"
+  end
+
+  create_table "tasks", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.jsonb "data", null: false
+    t.integer "state", default: 0, null: false
+    t.uuid "job_id", null: false
+    t.uuid "agent_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["agent_id"], name: "index_tasks_on_agent_id"
+    t.index ["job_id"], name: "index_tasks_on_job_id"
   end
 
   create_table "user_groups", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -89,6 +99,8 @@ ActiveRecord::Schema.define(version: 2021_05_05_172750) do
   add_foreign_key "jobs", "agents"
   add_foreign_key "jobs", "groups"
   add_foreign_key "storage_backends", "groups"
+  add_foreign_key "tasks", "agents"
+  add_foreign_key "tasks", "jobs"
   add_foreign_key "user_groups", "groups"
   add_foreign_key "user_groups", "users"
 end
