@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_02_153904) do
+ActiveRecord::Schema.define(version: 2021_05_05_172750) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -37,10 +37,9 @@ ActiveRecord::Schema.define(version: 2021_05_02_153904) do
   end
 
   create_table "jobs", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.string "type"
     t.uuid "group_id", null: false
     t.uuid "agent_id", null: false
-    t.jsonb "params"
+    t.jsonb "data"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["agent_id"], name: "index_jobs_on_agent_id"
