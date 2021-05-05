@@ -2,7 +2,7 @@
 
 module Api
   module V1
-    class GroupsController < ApiController
+    class AgentsController < JSONAPI::ResourceController
     end
   end
 end
