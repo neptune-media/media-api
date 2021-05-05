@@ -2,7 +2,7 @@
 
 module Api
   module V1
-    class TasksController < JSONAPI::ResourceController
+    class TasksController < ApiController
     end
   end
 end

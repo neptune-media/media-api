@@ -2,7 +2,7 @@
 
 module Api
   module V1
-    class JobsController < JSONAPI::ResourceController
+    class JobsController < ApiController
     end
   end
 end

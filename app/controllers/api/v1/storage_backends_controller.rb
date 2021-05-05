@@ -2,7 +2,7 @@
 
 module Api
   module V1
-    class StorageBackendsController < JSONAPI::ResourceController
+    class StorageBackendsController < ApiController
     end
   end
 end
