@@ -1,0 +1,62 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "/schema/v1/job/base.json",
+  "allOf": [
+    {
+      "$ref": "base.json#/definitions/base"
+    },
+    {
+      "type": "object",
+      "required": [
+        "spec"
+      ],
+      "properties": {
+        "kind": {
+          "const": "task"
+        },
+        "spec": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/downloadTask"
+            },
+            {
+              "$ref": "#/definitions/previewTask"
+            },
+            {
+              "$ref": "#/definitions/transcodeTask"
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "definitions": {
+    "downloadTask": {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "type": "string",
+          "const": "downloadTask"
+        }
+      }
+    },
+    "previewTask": {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "type": "string",
+          "const": "previewTask"
+        }
+      }
+    },
+    "transcodeTask": {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "type": "string",
+          "const": "transcodeTask"
+        }
+      }
+    }
+  }
+}
