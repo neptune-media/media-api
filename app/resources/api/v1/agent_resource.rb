@@ -6,7 +6,6 @@ module Api
       attributes :addr, :display_name, :job_types, :media_server_type, :media_types
 
       relationship :tasks, to: :many
-      relationship :groups, to: :one
     end
   end
 end

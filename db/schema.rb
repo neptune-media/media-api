@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_05_210709) do
+ActiveRecord::Schema.define(version: 2021_05_06_021702) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -23,26 +23,15 @@ ActiveRecord::Schema.define(version: 2021_05_05_210709) do
     t.string "addr", null: false
     t.string "display_name"
     t.uuid "access_key", null: false
-    t.uuid "group_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["group_id"], name: "index_agents_on_group_id"
-  end
-
-  create_table "groups", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.string "name"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["name"], name: "index_groups_on_name", unique: true
   end
 
   create_table "jobs", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.uuid "group_id", null: false
     t.uuid "agent_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["agent_id"], name: "index_jobs_on_agent_id"
-    t.index ["group_id"], name: "index_jobs_on_group_id"
   end
 
   create_table "storage_backends", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -53,10 +42,8 @@ ActiveRecord::Schema.define(version: 2021_05_05_210709) do
     t.text "access_key_ciphertext"
     t.text "secret_key_ciphertext"
     t.text "encrypted_kms_key"
-    t.uuid "group_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["group_id"], name: "index_storage_backends_on_group_id"
   end
 
   create_table "tasks", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -70,37 +57,7 @@ ActiveRecord::Schema.define(version: 2021_05_05_210709) do
     t.index ["job_id"], name: "index_tasks_on_job_id"
   end
 
-  create_table "user_groups", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.string "role"
-    t.uuid "user_id", null: false
-    t.uuid "group_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["group_id"], name: "index_user_groups_on_group_id"
-    t.index ["user_id", "group_id"], name: "index_user_groups_on_user_id_and_group_id", unique: true
-    t.index ["user_id"], name: "index_user_groups_on_user_id"
-  end
-
-  create_table "users", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.string "email", null: false
-    t.string "encrypted_password", null: false
-    t.string "username", null: false
-    t.string "reset_password_token"
-    t.datetime "reset_password_sent_at"
-    t.datetime "remember_created_at"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["email"], name: "index_users_on_email", unique: true
-    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
-    t.index ["username"], name: "index_users_on_username", unique: true
-  end
-
-  add_foreign_key "agents", "groups"
   add_foreign_key "jobs", "agents"
-  add_foreign_key "jobs", "groups"
-  add_foreign_key "storage_backends", "groups"
   add_foreign_key "tasks", "agents"
   add_foreign_key "tasks", "jobs"
-  add_foreign_key "user_groups", "groups"
-  add_foreign_key "user_groups", "users"
 end
