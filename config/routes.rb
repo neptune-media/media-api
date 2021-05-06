@@ -7,6 +7,12 @@ Rails.application.routes.draw do
       jsonapi_resources :jobs, only: [:index, :create, :show, :update, :destroy]
       jsonapi_resources :storage_backends, only: [:index, :create, :show, :update, :destroy]
       jsonapi_resources :tasks, only: [:index, :create, :show, :update, :destroy]
+
+      namespace :exec do
+        defaults format: :json do
+          post 'agents/register'
+        end
+      end
     end
   end
 

@@ -28,6 +28,14 @@ Style/BlockComments:
   Exclude:
     - 'spec/spec_helper.rb'
 
+Metrics/BlockLength:
+  Exclude:
+    - 'spec/**/*'
+
+RSpec/MultipleExpectations:
+  Exclude:
+    - 'spec/requests/**/*'
+
 Style/Documentation:
   Exclude:
     - 'app/models/application_record.rb'
