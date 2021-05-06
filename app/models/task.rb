@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# A single unit of work
 class Task < ApplicationRecord
   belongs_to :job
   belongs_to :agent

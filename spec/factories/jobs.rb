@@ -2,7 +2,6 @@
 
 FactoryBot.define do
   factory :job do
-    group { build(:group) }
     agent { build(:agent) }
   end
 end
