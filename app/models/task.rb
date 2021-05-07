@@ -5,8 +5,37 @@ class Task < ApplicationRecord
   belongs_to :job
   belongs_to :agent
 
+  enum state: {
+    created: 0,
+    pending: 1,
+    assigned: 2,
+    running: 3,
+    paused: 4,
+    finished: 5,
+    failed: 6
+  }
+
   validates :data, presence: true
   validate :valid_schema
+
+  def self.task_kind(kind)
+    where("data -> 'spec' -> 'kind' ? :kind", kind: kind)
+  end
+
+  def self.task_kinds(kinds)
+    return where(nil) if kinds&.empty?
+
+    partial = task_kind kinds.shift
+    kinds.each do |kind|
+      partial = partial.or task_kind(kind)
+    end
+
+    partial
+  end
+
+  def task_kind
+    data['spec']['kind']
+  end
 
   def json_schema_root
     Rails.root.join('app/models/schema/v1')

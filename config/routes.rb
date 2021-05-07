@@ -11,10 +11,11 @@ Rails.application.routes.draw do
       namespace :exec do
         defaults format: :json do
           post 'agents/register'
+          get 'tasks/poll'
+          post 'tasks/acquire'
+          post 'tasks/release'
         end
       end
     end
   end
-
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

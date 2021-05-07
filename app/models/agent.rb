@@ -6,6 +6,10 @@ class Agent < ApplicationRecord
 
   validates :access_key, :addr, presence: true
 
+  def can_exec_job_type?(type)
+    job_types&.include?(type) || false
+  end
+
   def job_types
     m = self[:job_types]
     m&.split(',')

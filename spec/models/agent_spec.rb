@@ -26,19 +26,33 @@ RSpec.shared_examples 'array_attribute' do
 end
 
 RSpec.describe Agent, type: :model do
-  subject { build(:agent) }
+  subject(:agent) { build(:agent) }
 
   include_examples 'model_validations'
 
+  describe '#can_exec_job_type?' do
+    subject(:agent) { build(:preview_agent) }
+
+    it 'returns false' do
+      expect(agent).not_to be_can_exec_job_type('transcodeJob')
+    end
+
+    it 'returns true' do
+      expect(agent).to be_can_exec_job_type('previewJob')
+    end
+  end
+
   describe '#job_types' do
-    let(:agent) { build(:agent, job_types: data) }
+    subject(:agent) { build(:agent, job_types: data) }
+
     let(:attr) { :job_types }
 
     include_examples 'array_attribute'
   end
 
   describe '#media_types' do
-    let(:agent) { build(:agent, media_types: data) }
+    subject(:agent) { build(:agent, media_types: data) }
+
     let(:attr) { :media_types }
 
     include_examples 'array_attribute'
