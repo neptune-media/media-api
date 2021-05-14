@@ -12,8 +12,8 @@ Rails.application.routes.draw do
         defaults format: :json do
           post 'agents/register'
           get 'tasks/poll'
-          post 'tasks/acquire'
-          post 'tasks/release'
+          post 'tasks/acquire/:id', to: 'tasks#acquire'
+          post 'tasks/release/:id', to: 'tasks#release'
         end
       end
     end

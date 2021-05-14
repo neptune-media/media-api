@@ -23,7 +23,7 @@ class Task < ApplicationRecord
   end
 
   def self.task_kinds(kinds)
-    return where(nil) if kinds&.empty?
+    return where(nil) if kinds.blank?
 
     partial = task_kind kinds.shift
     kinds.each do |kind|

@@ -12,14 +12,14 @@ RSpec.describe 'Api::V1::Exec::Tasks', type: :request do
 
   describe 'POST /acquire' do
     it 'returns http success' do
-      post '/api/v1/exec/tasks/acquire'
+      post '/api/v1/exec/tasks/acquire/foo'
       expect(response).to have_http_status(:success)
     end
   end
 
   describe 'POST /release' do
     it 'returns http success' do
-      post '/api/v1/exec/tasks/release'
+      post '/api/v1/exec/tasks/release/foo'
       expect(response).to have_http_status(:success)
     end
   end

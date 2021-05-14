@@ -5,7 +5,9 @@ module Api
     module Exec
       # Handles agent task management
       class TasksController < ApplicationController
-        def poll; end
+        def poll
+          @tasks = agent_tasks
+        end
 
         def acquire; end
 
@@ -18,7 +20,7 @@ module Api
         end
 
         def agent
-          @agent ||= Agent.find_by access_token: http_token
+          @agent ||= Agent.find_by access_key: http_token
         end
 
         def agent_tasks
@@ -26,7 +28,7 @@ module Api
         end
 
         def pending_tasks
-          Task.pending.task_kinds(agent.job_types)
+          Task.pending.task_kinds(agent&.job_types)
         end
       end
     end
