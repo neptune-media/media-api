@@ -9,7 +9,7 @@ module Api
         before_action :load_task, except: :poll
 
         def acquire
-          return render plain: 'Task is in invalid state', status: :bad_request unless @task.state == :pending
+          return render plain: 'Task is in invalid state', status: :bad_request unless @task.state == 'pending'
 
           @task.acquire! agent
         end
@@ -19,7 +19,7 @@ module Api
         end
 
         def release
-          @task.release! params['success']
+          @task.release! success: params['success']
           @task.save!
         rescue InvalidTaskStateError
           render plain: 'Task is in invalid state', status: :bad_request
@@ -28,7 +28,7 @@ module Api
         def update
           task_params = params.permit(:state)
           @task.update!(task_params)
-          render status: :no_content
+          head :no_content
         end
 
         private

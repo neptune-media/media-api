@@ -14,6 +14,7 @@ Rails.application.routes.draw do
           get 'tasks/poll'
           post 'tasks/acquire/:id', to: 'tasks#acquire'
           post 'tasks/release/:id', to: 'tasks#release'
+          post 'tasks/update/:id', to: 'tasks#update'
         end
       end
     end
