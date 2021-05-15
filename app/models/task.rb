@@ -1,14 +1,16 @@
 # frozen_string_literal: true
 
+class InvalidTaskStateError < StandardError; end
+
 # A single unit of work
 class Task < ApplicationRecord
   belongs_to :job
-  belongs_to :agent
+  belongs_to :agent, optional: true
 
   enum state: {
     created: 0,
     pending: 1,
-    assigned: 2,
+    acquired: 2,
     running: 3,
     paused: 4,
     finished: 5,
@@ -33,8 +35,14 @@ class Task < ApplicationRecord
     partial
   end
 
-  def task_kind
-    data['spec']['kind']
+  def acquire(agent)
+    self.agent = agent
+    self.state = :acquired
+    self
+  end
+
+  def acquire!(agent)
+    acquire(agent).save!
   end
 
   def json_schema_root
@@ -43,6 +51,32 @@ class Task < ApplicationRecord
 
   def json_schema_path(name)
     Pathname.new(json_schema_root.join(name).to_s)
+  end
+
+  def release(success: false)
+    case state
+    when 'acquired'
+      self.state = :pending
+      self.agent = nil unless preassigned?
+    when 'running'
+      self.state = if success
+                     :finished
+                   else
+                     :failed
+                   end
+    else
+      raise InvalidTaskStateError
+    end
+
+    self
+  end
+
+  def release!(success: false)
+    release(success: success).save!
+  end
+
+  def task_kind
+    data['spec']['kind']
   end
 
   def valid_schema

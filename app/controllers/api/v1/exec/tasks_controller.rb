@@ -5,15 +5,42 @@ module Api
     module Exec
       # Handles agent task management
       class TasksController < ApplicationController
+        before_action :require_agent
+        before_action :load_task, except: :poll
+
+        def acquire
+          return render plain: 'Task is in invalid state', status: :bad_request unless @task.state == :pending
+
+          @task.acquire! agent
+        end
+
         def poll
           @tasks = agent_tasks
         end
 
-        def acquire; end
+        def release
+          @task.release! params['success']
+          @task.save!
+        rescue InvalidTaskStateError
+          render plain: 'Task is in invalid state', status: :bad_request
+        end
 
-        def release; end
+        def update
+          task_params = params.permit(:state)
+          @task.update!(task_params)
+          render status: :no_content
+        end
 
         private
+
+        def load_task
+          @task = Task.find params['id']
+          render plain: 'Not Found', status: :not_found if @task.nil?
+        end
+
+        def require_agent
+          render plain: 'Missing access key', status: :bad_request if agent.nil?
+        end
 
         def http_token
           @http_token ||= (request.headers['Authorization'].split.last if request.headers['Authorization'].present?)
