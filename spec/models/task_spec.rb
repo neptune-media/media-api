@@ -4,7 +4,7 @@ require 'rails_helper'
 require 'shared_examples/model_validations'
 
 RSpec.describe Task, type: :model do
-  subject(:task) { create(:preview_task) }
+  subject(:task) { build(:preview_task) }
 
   include_examples 'model_validations'
 
