@@ -4,5 +4,9 @@ FactoryBot.define do
   factory :agent do
     access_key { SecureRandom.uuid }
     addr { '127.0.0.1' }
+
+    factory :preview_agent do
+      job_types { 'previewJob' }
+    end
   end
 end

@@ -20,9 +20,18 @@ Layout/LineLength:
   Exclude:
     - 'config/**/*'
 
+Metrics/BlockLength:
+  Exclude:
+    - 'spec/**/*'
+
 Metrics/MethodLength:
+  Max: 15
   Exclude:
     - 'db/**/*'
+
+RSpec/MultipleExpectations:
+  Exclude:
+    - 'spec/requests/**/*'
 
 Style/BlockComments:
   Exclude:

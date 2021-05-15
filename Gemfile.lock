@@ -103,6 +103,8 @@ GEM
     hana (1.3.7)
     i18n (1.8.10)
       concurrent-ruby (~> 1.0)
+    jbuilder (2.11.2)
+      activesupport (>= 5.0.0)
     jmespath (1.4.0)
     json_schemer (0.2.18)
       ecma-re-validator (~> 0.3)
@@ -260,6 +262,7 @@ DEPENDENCIES
   byebug
   devise
   factory_bot_rails
+  jbuilder (~> 2.7)
   json_schemer
   jsonapi-resources
   jwt

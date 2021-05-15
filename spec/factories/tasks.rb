@@ -3,7 +3,6 @@
 FactoryBot.define do
   factory :task do
     job { build(:job) }
-    agent { build(:agent) }
 
     factory :preview_task do
       data do

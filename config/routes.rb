@@ -7,8 +7,16 @@ Rails.application.routes.draw do
       jsonapi_resources :jobs, only: [:index, :create, :show, :update, :destroy]
       jsonapi_resources :storage_backends, only: [:index, :create, :show, :update, :destroy]
       jsonapi_resources :tasks, only: [:index, :create, :show, :update, :destroy]
+
+      namespace :exec do
+        defaults format: :json do
+          post 'agents/register'
+          get 'tasks/poll'
+          post 'tasks/acquire/:id', to: 'tasks#acquire'
+          post 'tasks/release/:id', to: 'tasks#release'
+          post 'tasks/update/:id', to: 'tasks#update'
+        end
+      end
     end
   end
-
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
