@@ -5,6 +5,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       jsonapi_resources :agents, only: [:index, :create, :show, :update, :destroy]
       jsonapi_resources :jobs, only: [:index, :create, :show, :update, :destroy]
+      jsonapi_resources :media_items, only: [:index, :create, :show, :update, :destroy]
       jsonapi_resources :storage_backends, only: [:index, :create, :show, :update, :destroy]
       jsonapi_resources :tasks, only: [:index, :create, :show, :update, :destroy]
 
