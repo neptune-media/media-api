@@ -20,21 +20,22 @@ Layout/LineLength:
   Exclude:
     - 'config/**/*'
 
-Metrics/MethodLength:
-  Exclude:
-    - 'db/**/*'
-
-Style/BlockComments:
-  Exclude:
-    - 'spec/spec_helper.rb'
-
 Metrics/BlockLength:
   Exclude:
     - 'spec/**/*'
 
+Metrics/MethodLength:
+  Max: 15
+  Exclude:
+    - 'db/**/*'
+
 RSpec/MultipleExpectations:
   Exclude:
     - 'spec/requests/**/*'
+
+Style/BlockComments:
+  Exclude:
+    - 'spec/spec_helper.rb'
 
 Style/Documentation:
   Exclude:

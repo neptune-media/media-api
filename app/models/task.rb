@@ -87,7 +87,7 @@ class Task < ApplicationRecord
     @schema.validate(data).each { |e| handle_schema_error e }
   end
 
-  # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
+  # rubocop:disable Metrics/AbcSize
   def handle_schema_error(error)
     case error['type']
     when 'const'
@@ -105,5 +105,5 @@ class Task < ApplicationRecord
       errors.add(:data, error)
     end
   end
-  # rubocop:enable Metrics/AbcSize, Metrics/MethodLength
+  # rubocop:enable Metrics/AbcSize
 end
