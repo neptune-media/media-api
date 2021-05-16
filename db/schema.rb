@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_14_031609) do
+ActiveRecord::Schema.define(version: 2021_05_16_021839) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -19,7 +19,7 @@ ActiveRecord::Schema.define(version: 2021_05_14_031609) do
   create_table "agents", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "media_server_type"
     t.string "media_types"
-    t.string "job_types"
+    t.string "task_types"
     t.string "addr", null: false
     t.string "display_name"
     t.uuid "access_key", null: false
@@ -28,10 +28,19 @@ ActiveRecord::Schema.define(version: 2021_05_14_031609) do
   end
 
   create_table "jobs", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.uuid "agent_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["agent_id"], name: "index_jobs_on_agent_id"
+  end
+
+  create_table "media_items", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "storage_backend_id", null: false
+    t.string "path"
+    t.boolean "uploaded", default: false, null: false
+    t.string "sha256"
+    t.jsonb "data"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["storage_backend_id"], name: "index_media_items_on_storage_backend_id"
   end
 
   create_table "storage_backends", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -58,7 +67,7 @@ ActiveRecord::Schema.define(version: 2021_05_14_031609) do
     t.index ["job_id"], name: "index_tasks_on_job_id"
   end
 
-  add_foreign_key "jobs", "agents"
+  add_foreign_key "media_items", "storage_backends"
   add_foreign_key "tasks", "agents"
   add_foreign_key "tasks", "jobs"
 end

@@ -1,3 +1,11 @@
+GIT
+  remote: https://github.com/ankane/kms_encrypted
+  revision: c6eb535293ee64b9b7c369c65c15b3b22528bb27
+  ref: c6eb535293ee64b9b7c369c65c15b3b22528bb27
+  specs:
+    kms_encrypted (1.2.1)
+      activesupport (>= 5)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -116,8 +124,6 @@ GEM
       concurrent-ruby
       railties (>= 4.1)
     jwt (2.2.3)
-    kms_encrypted (1.2.1)
-      activesupport (>= 5)
     listen (3.5.1)
       rb-fsevent (~> 0.10, >= 0.10.3)
       rb-inotify (~> 0.9, >= 0.9.10)
@@ -266,7 +272,7 @@ DEPENDENCIES
   json_schemer
   jsonapi-resources
   jwt
-  kms_encrypted
+  kms_encrypted!
   listen (~> 3.3)
   lockbox
   pg (~> 1.1)

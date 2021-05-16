@@ -55,7 +55,7 @@ module Api
         end
 
         def pending_tasks
-          Task.pending.task_kinds(agent&.job_types)
+          Task.pending.task_kinds(agent&.task_types)
         end
       end
     end
