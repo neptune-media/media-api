@@ -5,7 +5,7 @@ class CreateAgents < ActiveRecord::Migration[6.1]
     create_table :agents, id: :uuid do |t|
       t.string :media_server_type
       t.string :media_types
-      t.string :job_types
+      t.string :task_types
       t.string :addr, null: false
       t.string :display_name
       t.uuid :access_key, null: false

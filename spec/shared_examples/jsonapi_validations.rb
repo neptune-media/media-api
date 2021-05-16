@@ -13,7 +13,6 @@ RSpec.shared_examples 'jsonapi_create_validations' do |name|
     let(:payload) do
       {
         data: {
-          id: resource.id,
           type: resource_type,
           attributes: attributes,
           relationships: relationships

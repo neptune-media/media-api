@@ -2,21 +2,21 @@
 
 # Represent an agent and its capabilities
 class Agent < ApplicationRecord
-  has_many :jobs, dependent: :destroy
+  has_many :tasks, dependent: :destroy
 
   validates :access_key, :addr, presence: true
 
-  def can_exec_job_type?(type)
-    job_types&.include?(type) || false
+  def can_exec_task_type?(type)
+    task_types&.include?(type) || false
   end
 
-  def job_types
-    m = self[:job_types]
+  def task_types
+    m = self[:task_types]
     m&.split(',')
   end
 
-  def job_types=(value)
-    self[:job_types] = (value.is_a?(Array) && value.join(',')) || value
+  def task_types=(value)
+    self[:task_types] = (value.is_a?(Array) && value.join(',')) || value
   end
 
   def media_types

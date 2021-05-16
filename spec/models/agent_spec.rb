@@ -34,18 +34,18 @@ RSpec.describe Agent, type: :model do
     subject(:agent) { build(:preview_agent) }
 
     it 'returns false' do
-      expect(agent).not_to be_can_exec_job_type('transcodeJob')
+      expect(agent).not_to be_can_exec_task_type('transcodeJob')
     end
 
     it 'returns true' do
-      expect(agent).to be_can_exec_job_type('previewJob')
+      expect(agent).to be_can_exec_task_type('previewJob')
     end
   end
 
   describe '#job_types' do
-    subject(:agent) { build(:agent, job_types: data) }
+    subject(:agent) { build(:agent, task_types: data) }
 
-    let(:attr) { :job_types }
+    let(:attr) { :task_types }
 
     include_examples 'array_attribute'
   end
