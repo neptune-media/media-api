@@ -9,9 +9,9 @@ RSpec.describe 'Api::V1::Agents', type: :request do
   let(:resource_type) { 'agents' }
   let(:resources_path) { api_v1_agents_path }
 
-  include_examples 'jsonapi_delete_validations', 'agents'
-  include_examples 'jsonapi_read_validations', 'agents'
-  include_examples 'jsonapi_update_validations', 'agents' do
+  it_behaves_like 'jsonapi_delete_validations', 'agents'
+  it_behaves_like 'jsonapi_read_validations', 'agents'
+  it_behaves_like 'jsonapi_update_validations', 'agents' do
     let(:attributes) do
       {
         'display-name': 'test'
