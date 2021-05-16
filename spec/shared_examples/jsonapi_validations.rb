@@ -22,6 +22,7 @@ RSpec.shared_examples 'jsonapi_create_validations' do |name|
 
     it 'returns http success' do
       post resources_path, params: JSON.dump(payload), headers: headers
+      pp JSON.parse(response.body) unless response.status == 201
       expect(response).to have_http_status(:success)
     end
   end
