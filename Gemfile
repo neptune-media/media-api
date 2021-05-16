@@ -32,7 +32,8 @@ gem 'devise'
 gem 'jsonapi-resources'
 gem 'json_schemer'
 gem 'jwt'
-gem 'kms_encrypted'
+# Use ref for key_id= patch, until new version released
+gem 'kms_encrypted', git: 'https://github.com/ankane/kms_encrypted', ref: 'c6eb535293ee64b9b7c369c65c15b3b22528bb27'
 gem 'lockbox'
 gem 'sidekiq'
 

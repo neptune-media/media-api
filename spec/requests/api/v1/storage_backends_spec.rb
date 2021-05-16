@@ -14,7 +14,9 @@ RSpec.describe 'Api::V1::StorageBackends', type: :request do
       {
         'backend-type': 's3',
         bucket: 'test-bucket',
-        prefix: 'foo'
+        prefix: 'foo',
+        'access-key': 'foo',
+        'secret-key': 'bar'
       }
     end
   end
