@@ -4,8 +4,8 @@ module Api
   module V1
     class TaskResource < JSONAPI::Resource
       attributes :data
-      relationship :agents, to: :one
-      relationship :jobs, to: :one
+      relationship :agent, to: :one
+      relationship :job, to: :one
     end
   end
 end
