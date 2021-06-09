@@ -1,0 +1,9 @@
+FROM ruby:2.7-alpine
+RUN apk add --no-cache build-base git tzdata postgresql-dev postgresql-client
+EXPOSE 3000
+WORKDIR /app
+ADD Gemfile /app
+ADD Gemfile.lock /app
+RUN bundle config set without 'development test'
+RUN bundle install
+ADD . /app
