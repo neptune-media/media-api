@@ -1,9 +1,11 @@
 FROM ruby:2.7-alpine
 RUN apk add --no-cache build-base git tzdata postgresql-dev postgresql-client
+ENV RAILS_ENV production
 EXPOSE 3000
 WORKDIR /app
 ADD Gemfile /app
 ADD Gemfile.lock /app
 RUN bundle config set without 'development test'
 RUN bundle install
+ENTRYPOINT ["bundle", "exec", "puma", "-C", "config/puma.rb"]
 ADD . /app
