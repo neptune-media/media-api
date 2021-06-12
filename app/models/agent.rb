@@ -16,7 +16,7 @@ class Agent < ApplicationRecord
   end
 
   def task_types=(value)
-    self[:task_types] = (value.is_a?(Array) && value.join(',')) || value
+    self[:task_types] = (value.respond_to?(:join) && value.join(',')) || value
   end
 
   def media_types
@@ -25,6 +25,6 @@ class Agent < ApplicationRecord
   end
 
   def media_types=(value)
-    self[:media_types] = (value.is_a?(Array) && value.join(',')) || value
+    self[:media_types] = (value.respond_to?(:join) && value.join(',')) || value
   end
 end
