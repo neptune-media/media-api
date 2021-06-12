@@ -14,6 +14,7 @@ Rails.application.routes.draw do
       namespace :exec do
         defaults format: :json do
           post 'agents/register'
+          post 'media/import'
           get 'tasks/poll'
           post 'tasks/acquire/:id', to: 'tasks#acquire'
           post 'tasks/release/:id', to: 'tasks#release'
