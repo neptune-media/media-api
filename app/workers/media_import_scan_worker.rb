@@ -4,21 +4,30 @@ require 'concerns/object_storage'
 
 class MediaImportScanWorker
   include Sidekiq::Worker
+  include Sidekiq::Lock::Worker
   include ObjectStorage
 
+  sidekiq_options lock: { timeout: 30_000, name: 'MediaImportScanWorker' }
+
   def perform(storage_backend_id, *_args)
-    @storage_backend = StorageBackend.find storage_backend_id
+    return unless lock.acquire!
 
-    metadata_objects = bucket_objects.filter do |obj|
-      obj.key.ends_with? '.json'
-    end
+    begin
+      @storage_backend = StorageBackend.find storage_backend_id
 
-    metadata_objects.each do |obj|
-      path = obj.key.delete_suffix '.json'
-      media_item = MediaItem.find_by storage_backend: @storage_backend, path: path
+      metadata_objects = bucket_objects.filter do |obj|
+        obj.key.ends_with? '.json'
+      end
 
-      # This is a new upload, enqueue the import job
-      ImportMediaWorker.perform_async @storage_backend.id, path if media_item.nil?
+      metadata_objects.each do |obj|
+        path = obj.key.delete_suffix '.json'
+        media_item = MediaItem.find_by storage_backend: @storage_backend, path: path
+
+        # This is a new upload, enqueue the import job
+        ImportMediaWorker.perform_async @storage_backend.id, path if media_item.nil?
+      end
+    ensure
+      lock.release!
     end
   end
 
