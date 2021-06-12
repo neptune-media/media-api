@@ -12,7 +12,7 @@ module Api
         private
 
         def agent_params
-          params.permit(:id, :addr, :media_server_type, :media_types, :task_types)
+          params.permit(:id, :addr, :media_server_type, media_types: [], task_types: [])
         end
 
         def agent_from_payload(payload)
