@@ -30,7 +30,7 @@ RSpec.describe Agent, type: :model do
 
   include_examples 'model_validations'
 
-  describe '#can_exec_job_type?' do
+  describe '#can_exec_task_type?' do
     subject(:agent) { build(:preview_agent) }
 
     it 'returns false' do
@@ -42,7 +42,7 @@ RSpec.describe Agent, type: :model do
     end
   end
 
-  describe '#job_types' do
+  describe '#task_types' do
     subject(:agent) { build(:agent, task_types: data) }
 
     let(:attr) { :task_types }
