@@ -28,6 +28,7 @@ gem 'bootsnap', '>= 1.4.4', require: false
 gem 'rack-cors'
 
 gem 'aws-sdk-kms'
+gem 'aws-sdk-s3'
 gem 'devise'
 gem 'jsonapi-resources'
 gem 'json_schemer'
@@ -36,6 +37,7 @@ gem 'jwt'
 gem 'kms_encrypted', git: 'https://github.com/ankane/kms_encrypted', ref: 'c6eb535293ee64b9b7c369c65c15b3b22528bb27'
 gem 'lockbox'
 gem 'sidekiq'
+gem 'sidekiq-lock'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
