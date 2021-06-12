@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ObjectStorage
   def client
     @client ||= Aws::S3::Client.new(

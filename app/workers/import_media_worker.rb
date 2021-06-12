@@ -19,10 +19,10 @@ class ImportMediaWorker
 
   def parse_metadata(metadata)
     {
-      sha256: metadata["sha256"],
+      sha256: metadata['sha256'],
       uploaded: true,
       data: {
-        import_path: metadata["import_path"],
+        import_path: metadata['import_path']
       }
     }
   end
