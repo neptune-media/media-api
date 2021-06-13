@@ -9,13 +9,13 @@ class ImportMediaWorker
   include ObjectStorage
 
   def perform(storage_backend_id, path, *_args)
-    @storage_backend = StorageBackend.find storage_backend_id
+    metadata = get_metadata storage_backend_id, path
+
     @media_item = MediaItem.find_or_create_by(
-      storage_backend: @storage_backend,
+      storage_backend: storage_backend(storage_backend_id),
       path: path
     )
 
-    metadata = get_metadata path
     @media_item.update!(parse_metadata(metadata))
   end
 
@@ -29,9 +29,9 @@ class ImportMediaWorker
     }
   end
 
-  def get_metadata(path)
+  def get_metadata(id, path)
     metadata_path = "#{path}.json"
-    resp = client.get_object(bucket: @storage_backend.bucket, key: metadata_path)
+    resp = client(id).get_object(bucket: @storage_backend.bucket, key: metadata_path)
     JSON.parse resp.body.read
   end
 end
