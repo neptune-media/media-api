@@ -2,6 +2,8 @@
 
 require 'concerns/object_storage'
 
+# ImportMediaWorker reads the metadata file for a media file, and
+# records it to the database
 class ImportMediaWorker
   include Sidekiq::Worker
   include ObjectStorage
