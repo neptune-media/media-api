@@ -6,6 +6,9 @@ FactoryBot.define do
 
     factory :minio_storage_backend do
       backend_type { 'minio' }
+      url { 'http://localhost:9000' }
+      access_key { 'minio' }
+      secret_key { 'minio' }
     end
 
     factory :s3_storage_backend do
